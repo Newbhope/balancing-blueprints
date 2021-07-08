@@ -3,7 +3,6 @@
 #include "BalancingBlueprintsPawn.h"
 #include "BalancingBlueprintsProjectile.h"
 #include "TimerManager.h"
-#include "UObject/ConstructorHelpers.h"
 #include "Camera/CameraComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/InputComponent.h"
@@ -11,7 +10,6 @@
 #include "Engine/CollisionProfile.h"
 #include "Engine/StaticMesh.h"
 #include "Kismet/GameplayStatics.h"
-#include "Sound/SoundBase.h"
 
 const FName ABalancingBlueprintsPawn::MoveForwardBinding("MoveForward");
 const FName ABalancingBlueprintsPawn::MoveRightBinding("MoveRight");
@@ -20,16 +18,10 @@ const FName ABalancingBlueprintsPawn::FireRightBinding("FireRight");
 
 ABalancingBlueprintsPawn::ABalancingBlueprintsPawn()
 {	
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("/Game/TwinStick/Meshes/TwinStickUFO.TwinStickUFO"));
 	// Create the mesh component
 	ShipMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ShipMesh"));
 	RootComponent = ShipMeshComponent;
 	ShipMeshComponent->SetCollisionProfileName(UCollisionProfile::Pawn_ProfileName);
-	ShipMeshComponent->SetStaticMesh(ShipMesh.Object);
-	
-	// Cache our sound effect
-	static ConstructorHelpers::FObjectFinder<USoundBase> FireAudio(TEXT("/Game/TwinStick/Audio/TwinStickFire.TwinStickFire"));
-	FireSound = FireAudio.Object;
 
 	// Create a camera boom...
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
