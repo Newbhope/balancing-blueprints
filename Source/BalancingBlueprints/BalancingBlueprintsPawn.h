@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "BalancingBlueprintsPawn.generated.h"
 
+class ABalancingBlueprintsProjectile;
+
 UCLASS(Blueprintable)
 class ABalancingBlueprintsPawn : public APawn
 {
@@ -25,6 +27,8 @@ class ABalancingBlueprintsPawn : public APawn
 
 public:
 	ABalancingBlueprintsPawn();
+	UPROPERTY(EditAnywhere, Category="Projectile")
+	TSubclassOf<ABalancingBlueprintsProjectile> Projectile;
 
 	/** Offset from the ships location to spawn projectiles */
 	UPROPERTY(Category = Gameplay, EditAnywhere, BlueprintReadWrite )

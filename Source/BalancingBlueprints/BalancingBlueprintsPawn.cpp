@@ -115,7 +115,7 @@ void ABalancingBlueprintsPawn::FireShot(FVector FireDirection)
 			if (World != nullptr)
 			{
 				// spawn the projectile
-				World->SpawnActor<ABalancingBlueprintsProjectile>(SpawnLocation, FireRotation);
+				World->SpawnActor<ABalancingBlueprintsProjectile>(Projectile, SpawnLocation, FireRotation);
 			}
 
 			bCanFire = false;
