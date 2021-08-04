@@ -15,6 +15,7 @@ const FName ABalancingBlueprintsPawn::MoveForwardBinding("MoveForward");
 const FName ABalancingBlueprintsPawn::MoveRightBinding("MoveRight");
 const FName ABalancingBlueprintsPawn::FireForwardBinding("FireForward");
 const FName ABalancingBlueprintsPawn::FireRightBinding("FireRight");
+const FName ABalancingBlueprintsPawn::MoveVerticalBinding("MoveVertical");
 
 ABalancingBlueprintsPawn::ABalancingBlueprintsPawn()
 {	
@@ -53,6 +54,8 @@ void ABalancingBlueprintsPawn::SetupPlayerInputComponent(class UInputComponent* 
 	PlayerInputComponent->BindAxis(MoveRightBinding);
 	PlayerInputComponent->BindAxis(FireForwardBinding);
 	PlayerInputComponent->BindAxis(FireRightBinding);
+
+	PlayerInputComponent->BindAxis(MoveVerticalBinding);
 }
 
 void ABalancingBlueprintsPawn::Tick(float DeltaSeconds)
@@ -60,12 +63,17 @@ void ABalancingBlueprintsPawn::Tick(float DeltaSeconds)
 	// Find movement direction
 	const float ForwardValue = GetInputAxisValue(MoveForwardBinding);
 	const float RightValue = GetInputAxisValue(MoveRightBinding);
+	const float VerticalValue = GetInputAxisValue(MoveVerticalBinding);
 
 	// Clamp max size so that (X=1, Y=1) doesn't cause faster movement in diagonal directions
 	const FVector MoveDirection = FVector(ForwardValue, RightValue, 0.f).GetClampedToMaxSize(1.0f);
 
+	const FVector VerticalDirection = FVector(0.f, 0.f, VerticalValue);
+
+	const FVector TotalDirection = MoveDirection + VerticalDirection;
+
 	// Calculate  movement
-	const FVector Movement = MoveDirection * MoveSpeed * DeltaSeconds;
+	const FVector Movement = TotalDirection * MoveSpeed * DeltaSeconds;
 
 	// If non-zero size, move this actor
 	if (Movement.SizeSquared() > 0.0f)
