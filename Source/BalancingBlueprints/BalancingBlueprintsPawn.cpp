@@ -66,14 +66,14 @@ void ABalancingBlueprintsPawn::Tick(float DeltaSeconds)
 	const float VerticalValue = GetInputAxisValue(MoveVerticalBinding);
 
 	// Clamp max size so that (X=1, Y=1) doesn't cause faster movement in diagonal directions
-	const FVector MoveDirection = FVector(ForwardValue, RightValue, 0.f).GetClampedToMaxSize(1.0f);
+	const FVector HorizontalDirection = FVector(ForwardValue, RightValue, 0.f).GetClampedToMaxSize(1.0f);
 
 	const FVector VerticalDirection = FVector(0.f, 0.f, VerticalValue);
 
-	const FVector TotalDirection = MoveDirection + VerticalDirection;
+	const FVector MoveDirection = HorizontalDirection + VerticalDirection;
 
 	// Calculate  movement
-	const FVector Movement = TotalDirection * MoveSpeed * DeltaSeconds;
+	const FVector Movement = MoveDirection * MoveSpeed * DeltaSeconds;
 
 	// If non-zero size, move this actor
 	if (Movement.SizeSquared() > 0.0f)
