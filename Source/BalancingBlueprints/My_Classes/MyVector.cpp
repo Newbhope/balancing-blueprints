@@ -26,3 +26,18 @@ FMyVector* FMyVector::Add(const FMyVector* VectorOne, const FMyVector* VectorTwo
     return ResultingVector;
 }
 
+FMyVector* FMyVector::Subtract(const FMyVector* VectorOne, const FMyVector* VectorTwo)
+{
+    return new FMyVector(1, 2, 3);
+}
+
+double FMyVector::DotProduct(const FMyVector* VectorOne, const FMyVector* VectorTwo)
+{
+    return 1;
+}
+
+FMyVector* FMyVector::CrossProduct(const FMyVector* VectorOne, const FMyVector* VectorTwo)
+{
+    return new FMyVector(1, 2, 3);
+}
+
