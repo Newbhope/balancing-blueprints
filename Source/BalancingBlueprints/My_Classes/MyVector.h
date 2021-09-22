@@ -23,7 +23,11 @@ public:
 	// Returns a new MyVector pointer with component values that are the difference of the two MyVector parameters
 	static FMyVector* Subtract(const FMyVector* VectorOne, const FMyVector* VectorTwo);
 
+	static FMyVector* ScalarMultiply(const FMyVector* Vector, const double Scalar);
+
 	static double DotProduct(const FMyVector* VectorOne, const FMyVector* VectorTwo);
 
 	static FMyVector* CrossProduct(const FMyVector* VectorOne, const FMyVector* VectorTwo);
+
+	static double Magnitude(const FMyVector* Vector);
 };
