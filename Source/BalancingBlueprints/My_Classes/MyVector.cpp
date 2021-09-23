@@ -1,6 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
+#include <math.h>
 #include "MyVector.h"
 
 FMyVector::FMyVector(const double X, const double Y, const double Z)
@@ -70,6 +70,19 @@ FMyVector* FMyVector::CrossProduct(const FMyVector* VectorOne, const FMyVector* 
 
 double FMyVector::Magnitude(const FMyVector* Vector)
 {
-    return 5;
+    const double ComponentsSummed = pow(Vector->XValue, 2) + pow(Vector->YValue, 2) + pow(Vector->ZValue, 2);
+    return sqrt(ComponentsSummed);
+}
+
+FMyVector* FMyVector::Normalize(const FMyVector* Vector)
+{
+    const double VectorMagnitude = Magnitude(Vector);
+    const double ResultXValue = Vector->XValue / VectorMagnitude;
+    const double ResultYValue = Vector->YValue / VectorMagnitude;
+    const double ResultZValue = Vector->ZValue / VectorMagnitude;
+
+    FMyVector* ResultingVector = new FMyVector(ResultXValue, ResultYValue, ResultZValue);
+
+    return ResultingVector;
 }
 

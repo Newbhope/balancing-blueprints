@@ -30,4 +30,6 @@ public:
 	static FMyVector* CrossProduct(const FMyVector* VectorOne, const FMyVector* VectorTwo);
 
 	static double Magnitude(const FMyVector* Vector);
+
+	static FMyVector* Normalize(const FMyVector* Vector);
 };
